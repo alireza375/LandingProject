@@ -20,6 +20,7 @@ function successResponse($message = null, $data = null, $status = 200)
     return response()->json($response, $status);
 }
 
+
 // function otpVerify($email = null, $otp = null, $type = null)
 // {
 
@@ -139,8 +140,9 @@ function fileUploadAWS($file, $path, $old_file = null)
 {
     try {
         $fileObj = Storage::disk('s3')->put($path, $file, 'public');
-        $url = Storage::disk('s3')->url($fileObj);
-        //return ["url" => $url,"status" => true];
+        $url = Storage::disk('s3')->url.($fileObj);
+        // return ["url" => $url,"status" => true];
+
         if ($old_file != null) {
             $file = explode(IMAGE_URL, $old_file);
             Storage::disk('s3')->delete($file[1]);
@@ -230,6 +232,7 @@ function removeFileLocal($path, $old_file)
     }
     return true;
 }
+
 
 /**
  ** Random String
