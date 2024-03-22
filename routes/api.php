@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FacultiyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\BannerController;
@@ -8,6 +11,8 @@ use App\Http\Controllers\API\NoticeController;
 use App\Http\Controllers\API\GallaryController;
 use App\Http\Controllers\API\FooterLogoController;
 use App\Http\Controllers\API\NewsAndEventController;
+
+use App\Http\Controllers\InspirationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +58,30 @@ Route::delete('delete/footer', [FooterController::class, 'delete']);
 Route::get('index/footer/logo', [FooterLogoController::class, 'index']);
 Route::post('updateOrAdd/footer/logo', [FooterLogoController::class, 'UpdateOrAddFooterLogo']);
 Route::delete('delete/footer/logo', [FooterLogoController::class, 'delete']);
+
+//inspiration
+Route::post('/create-inspiration', [InspirationController::class, 'storeUpdateInspiration']);
+//Route::post('/update-inspiration', [InspirationController::class, 'update']);
+Route::get('/index/list', [InspirationController::class, 'index']);
+Route::get('/inspiration/{id?}', [InspirationController::class, 'show']);
+Route::delete('/delete', [InspirationController::class, 'delete']);
+
+//inspirationCard
+Route::get('/index/list',[CardController::class, "index"]);
+Route::post('/createOrUpdate-card',[CardController::class, "updateOrcreate"]);
+Route::delete('/delete/card',[CardController::class, "delete"]);
+Route::get('/show/{id?}',[CardController::class, "show"]);
+
+//course
+Route::get('/index/courseList',[CourseController::class,'index']);
+Route::get('/show/courseList/{id?}',[CourseController::class,'show']);
+Route::post('/updateOrCreate',[CourseController::class,'updateOrcreateCourse']);
+Route::delete('/delete/course',[CourseController::class,'delete']);
+
+//Faculty
+Route::get('/index/facultyList',[FacultiyController::class, 'index']);
+Route::get('/show/faculty',[FacultiyController::class, 'show']);
+Route::post('/updateOrCreate',[FacultiyController::class, 'updateOrCreateFaculty']);
+Route::delete('/delete/faculty',[FacultiyController::class, 'delete']);
+    
 
